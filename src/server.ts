@@ -1,12 +1,17 @@
-import app from './app';
+import server from './app';
 
-app.listen(process.env.PORT as string, () => {
+server.listen(process.env.PORT as string, () => {
     console.log('server is listening');
 })
 
-// unhandled rejection, such as not throwing a catch request
+// unhandled rejection, such as not throwing a catch function to a promsie
 process.on('unhandledRejection', (reason: Error | any) => {
     console.log(`Unhandled Rejection: ${reason.message || reason}`);
-  
+
     throw new Error(reason.message || reason);
-  });
+});
+
+process.on('uncaughtException', (error: Error) => {
+    console.log(`Uncaught Exception: ${error.message}`, error);
+
+});

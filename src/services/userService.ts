@@ -8,8 +8,8 @@ userService.checkUserExists = async (email:string): Promise<boolean | null> => {
     try {
         const user = await userRepo.findByEmail(email);
         return user ? true : false
-    } catch (error) {
-        throw error;
+    } catch (error:any ) {
+        throw new Error(error.message);
     }
 }
 
@@ -17,8 +17,8 @@ userService.createUser = async (user:IUser): Promise<IUser | null>  => {
     try {
         const newUser = await userRepo.createUser(user);
         return newUser;
-    } catch (error) {
-        throw error;
+    }  catch (error:any ) {
+        throw new Error(error.message);
     }
 }
 

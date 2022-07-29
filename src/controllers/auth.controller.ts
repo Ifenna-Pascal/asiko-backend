@@ -1,8 +1,10 @@
 import userService from '../services/userService';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import { AppError } from '../core/AppError';
+import { HttpCode } from '../interface/server.interface';
 
 export default class AuthController {
-    public userExists = async (req: Request, res: Response) => {
+    public userExists = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { email } = req.body;
             const userExists = await userService.checkUserExists(email);
@@ -11,11 +13,11 @@ export default class AuthController {
                 value: userExists
             });
         } catch (error) {
-            res.status(403).json({ message: "error", value: error })
+            next(new AppError({httpCode:HttpCode.BAD_REQUEST, description: error.message}))
         }
     }
 
-    public createUser = async (req: Request, res: Response) => {
+    public createUser = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const data = req.body;
             const newUser = await userService.createUser(data);
@@ -24,7 +26,7 @@ export default class AuthController {
                 value: newUser
             });
         } catch (error) {
-            res.status(403).json({ message: "error", value: error })
+            next(new AppError({httpCode:HttpCode.BAD_REQUEST, description: error.message}))
         }
     }
 }
