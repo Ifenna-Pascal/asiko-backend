@@ -4,11 +4,11 @@ import { IUserService, IUser } from "../interface/auth.interface";
 
 const userService = {} as IUserService;
 
-userService.checkUserExists = async (email:string): Promise<boolean | null> => {
+userService.checkUserExists = async (email:string): Promise<IUser | null> => {
     try {
         const user = await userRepo.findByEmail(email);
-        return user ? true : false
-    } catch (error:any ) {
+        return user;
+    } catch (error ) {
         throw new Error(error.message);
     }
 }

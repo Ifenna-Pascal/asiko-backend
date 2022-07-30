@@ -5,7 +5,6 @@ class UserRepo {
   public async findByEmail(email: string): Promise<IUser | null> {
    try {
     const user = await  Users.findOne({ email: email }).exec();
-    console.log(user);
     return user
    }catch (error) {
     console.log(error,"error")

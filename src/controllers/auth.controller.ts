@@ -10,7 +10,8 @@ export default class AuthController {
             const userExists = await userService.checkUserExists(email);
             res.status(200).json({
                 message: "success",
-                value: userExists
+                user: userExists,
+                value: userExists ? true : false
             });
         } catch (error) {
             next(new AppError({httpCode:HttpCode.BAD_REQUEST, description: error.message}))
