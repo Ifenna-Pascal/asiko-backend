@@ -7,6 +7,12 @@ export interface IGetUserAuthInfoRequest extends Request {
     user: string | JwtPayload;
 };
 
+export interface IAuthMiddleware extends Request {
+    user: {
+        id: string;
+    }
+}
+
 //  user model interface
 export interface IUser extends Document {
     firstName: string;
@@ -17,6 +23,6 @@ export interface IUser extends Document {
 
 // user services interface design
 export interface IUserService {
-    checkUserExists: (email: string) => Promise<IUser | null>;
+    checkUserExists: (email: string) => Promise<boolean | null>;
     createUser: (user: IUser) => Promise<IUser | null>;
 }

@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import userController from '../../controllers/auth.controller';
+import authController from '../../controllers/auth.controller';
 
 // instantiate router
 const router = Router();
 
 // instantiate controller
-const user = new userController();
+const user = new authController();
 
 router.post('/userExists', user.userExists);
 router.post('/signup', user.createUser);
