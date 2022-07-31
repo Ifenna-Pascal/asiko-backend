@@ -14,7 +14,7 @@ class UserRepo {
 
   public async createUser(user: IUser): Promise<IUser> {
     try {
-      const newUser = await Users.create(user);;
+      const newUser = await Users.create(user);
       return newUser
      }catch (error) {
       throw new Error(error.message)
