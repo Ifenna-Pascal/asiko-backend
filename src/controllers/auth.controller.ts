@@ -2,6 +2,7 @@ import authService from '../services/authService';
 import { NextFunction, Request, Response } from 'express';
 import { AppError } from '../core/AppError';
 import { HttpCode } from '../interface/server.interface';
+import { SignToken } from '../utility/jsonSignin';
 
 export default class AuthController {
     public userExists = async (req: Request, res: Response, next: NextFunction) => {
@@ -27,6 +28,19 @@ export default class AuthController {
             });
         } catch (error) {
             next(new AppError({httpCode:HttpCode.BAD_REQUEST, description: error.message}))
+        }
+    }
+
+    public SignToken = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const token = await SignToken(req.body?.email);
+            console.log(token);
+            res.status(200).json({
+                message: "Token is valid",
+                value: token
+            })
+        }catch (error) {
+            next(new AppError({httpCode:HttpCode.BAD_REQUEST, description: error.message}))   
         }
     }
 }

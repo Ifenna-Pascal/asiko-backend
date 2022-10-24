@@ -6,7 +6,7 @@ class UserService {
     public getUserPofile = async (email:string): Promise<IUser | null> => {
         try {
             const user = await userRepo.findByEmail(email);
-            return user && user;
+            return user;
         } catch (error ) {
             throw new Error(error.message);
         }

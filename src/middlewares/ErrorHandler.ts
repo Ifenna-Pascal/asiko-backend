@@ -10,14 +10,11 @@ export const requestLogger = (request: Request, response: Response, next: NextFu
 // Error Logger
 export const errorLogger = (error: Error, request: Request, response: Response, next: NextFunction) => {
     console.log(`error ${error.message}`)
-    next(error) // calling next middleware
+    // calling next middleware
+    next(error) 
 }
 
-// export const invalidPathHandler = (request: Request, response: Response, next: NextFunction) => {
-//     response.status(400)
-//     response.send('invalid path')
-//   }
-
+ 
 // Actual Error Handler
 export const errorResponder = (error: AppError, request: Request, response: Response, next: NextFunction) => {
     response.header("Content-Type", 'application/json')

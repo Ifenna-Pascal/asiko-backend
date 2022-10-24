@@ -1,5 +1,5 @@
 import { AppError } from "../core/AppError";
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { HttpCode } from "../interface/server.interface";
 
 const middleware = (schema:any, property = "body") => {
